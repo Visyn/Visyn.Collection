@@ -24,7 +24,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Visyn.Public.Comparison;
+using Visyn.Comparison;
 
 namespace Visyn.Collection
 {

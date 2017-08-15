@@ -23,8 +23,8 @@
 #endregion
 
 using System.Collections.Generic;
-using Visyn.Public.Criteria;
-using Visyn.Public.JetBrains;
+using Visyn.Criteria;
+using Visyn.JetBrains;
 
 namespace Visyn.Collection
 {

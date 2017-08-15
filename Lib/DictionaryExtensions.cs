@@ -27,7 +27,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using Visyn.Public.JetBrains;
+using Visyn.JetBrains;
 
 namespace Visyn.Collection
 {

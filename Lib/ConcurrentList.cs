@@ -26,7 +26,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
-using Visyn.Public.JetBrains;
+using Visyn.JetBrains;
 
 namespace Visyn.Collection
 {

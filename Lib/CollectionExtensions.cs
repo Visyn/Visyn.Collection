@@ -28,7 +28,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Visyn.Public.JetBrains;
+using Visyn.JetBrains;
 using NotRecommended = System.ObsoleteAttribute;
 
 namespace Visyn.Collection
