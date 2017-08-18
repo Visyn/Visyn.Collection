@@ -54,6 +54,7 @@
     <Compile Include="KeyValueList.cs" />
     <Compile Include="KeyValuePairExtensions.cs" />
     <Compile Include="ListExtensions.cs" />
+    <Compile Include="MoreLinq\Windowed.cs" />
     <Compile Include="ObservableCollectionExtended.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleCache.cs" />
@@ -73,6 +74,9 @@
       <Project>{aba4963b-56ba-4b42-8c2a-17be811e5f8e}</Project>
       <Name>Visyn.Public</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

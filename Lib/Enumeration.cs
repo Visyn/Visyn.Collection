@@ -77,5 +77,19 @@ namespace Visyn.Collection
             if (by > 0) for (var i = start; i < end; i += by) yield return i;
             else if (by < 0) for (var i = start; i > end; i += by) yield return i;
         }
+
+        public static void ForEach<T>(this IEnumerable<T> items, Action<T> action)
+        {
+            foreach(var item in items)
+            {
+                action(item);
+            }
+        }
+
+        [Obsolete("Use items.Select(function)", true)]
+        public static IEnumerable<TResult> ForEach<T,TResult>(this IEnumerable<T> items, Func<T, TResult> function)
+        {
+            return items.Select(function);
+        }
     }
 }
