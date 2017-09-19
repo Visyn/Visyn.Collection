@@ -45,10 +45,10 @@ namespace Visyn.Collection
         private int _version;
 
         private object _syncRoot;
-        private const int _MinimumGrow = 4;
-        private const int _ShrinkThreshold = 32;
-        private const int _GrowFactor = 200;
-        private const int _DefaultCapacity = 4;
+        //private const int _MinimumGrow = 4;
+        //private const int _ShrinkThreshold = 32;
+        //private const int _GrowFactor = 200;
+        //private const int _DefaultCapacity = 4;
 
         private readonly EqualityComparer<T> equalityComparer = EqualityComparer<T>.Default;
 

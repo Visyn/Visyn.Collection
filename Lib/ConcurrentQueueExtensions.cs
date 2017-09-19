@@ -38,6 +38,7 @@ namespace Visyn.Collection
                 T item;
                 queue.TryDequeue(out item);
             }
+            
         }
 
 

@@ -27,6 +27,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Windows.Threading;
+using Visyn.Threads;
 
 namespace Visyn.Collection
 {
@@ -48,25 +50,77 @@ namespace Visyn.Collection
 
     public sealed class ObservableCollectionExtended<T> : ObservableCollection<T>
     {
+        private readonly Dispatcher _dispatcher;
         #region Constructors
 
         public ObservableCollectionExtended()
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
         }   
 
         public ObservableCollectionExtended(List<T> list) : base(list)
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
         }
 
         public ObservableCollectionExtended(IEnumerable<T> collection) : base(collection)
         {
+            _dispatcher = Dispatcher.CurrentDispatcher;
         }
 
         #endregion
 
         public void ClearWithoutNotify()
         {
+            _dispatcher.AssertAccess();
             Items.Clear();
+        }
+
+        //public new bool Remove(T item)
+        //{
+        //    return Items.Remove(item);
+        //}
+        public bool RemoveWithoutNotify(T item)
+        {
+            _dispatcher.AssertAccess();
+            return Items.Remove(item);
+        }
+
+        public int RemoveWithoutNotify(IEnumerable<T> items)
+        {
+            _dispatcher.AssertAccess();
+            int count=0;
+            foreach (var item in items)
+            {
+                Items.Remove(item);
+                count++;
+            }
+            return count;
+        }
+
+        public int RemoveItems(IEnumerable<T> items, ECollectionChangeNotificationMode notificationMode = ECollectionChangeNotificationMode.Add)
+        {
+            _dispatcher.AssertAccess();
+            int count;
+            if (notificationMode == ECollectionChangeNotificationMode.Reset)
+            {
+                count = RemoveWithoutNotify(items);
+                OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
+                OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
+                OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+
+                return count;
+            }
+
+            var startIndex = Count;
+            var changedItems = items as List<T> ?? new List<T>(items);
+
+            count = RemoveWithoutNotify(changedItems);
+
+            OnPropertyChanged(new PropertyChangedEventArgs(nameof(Count)));
+            OnPropertyChanged(new PropertyChangedEventArgs("Item[]"));
+            OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, changedItems, startIndex));
+            return count;
         }
 
         /// <summary> 
@@ -75,6 +129,7 @@ namespace Visyn.Collection
         /// <exception cref="ArgumentNullException"><paramref name="itemsToAdd"/> is <see langword="null" />.</exception>
         public void AddRange( IEnumerable<T> itemsToAdd, ECollectionChangeNotificationMode notificationMode = ECollectionChangeNotificationMode.Add)
         {
+            _dispatcher.AssertAccess();
             if (itemsToAdd == null)
             {
                 throw new ArgumentNullException(nameof(itemsToAdd));
@@ -107,5 +162,6 @@ namespace Visyn.Collection
             OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, changedItems, startIndex));
         }
 
+        
     }
 }

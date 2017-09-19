@@ -41,8 +41,7 @@ namespace Visyn.Collection
 
         public List<T> MeetCriteria(IEnumerable<T> entities)
         {
-            if (Count == 0) return entities.ToList();
-            return new List<T>(entities.Where(MeetCriteria));
+            return Count == 0 ? entities.ToList() : new List<T>(entities.Where(MeetCriteria));
         }
     }
 }

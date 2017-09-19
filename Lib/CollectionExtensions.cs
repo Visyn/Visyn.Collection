@@ -164,6 +164,16 @@ namespace Visyn.Collection
             }
         }
 
+        public static IEnumerable FirstItems(this IEnumerable collection, int count)
+        {
+            var i = 0;
+            foreach (var item in collection)
+            {
+                if (i++ < count) yield return item;
+                else break;
+            }
+        }
+
         [Obsolete("Use ToArray<object>() instead",false)]
         public static object[] ToObjectArray(this ICollection collection)
         {
@@ -328,6 +338,18 @@ namespace Visyn.Collection
             foreach (var item in remove)
             {
                 list.Remove(item);
+            }
+            return list;
+        }
+
+        public static IList RemoveItems(this IList list, IEnumerable remove)
+        {
+            if (remove == null) return list;
+            
+            foreach(var item in remove)
+            {
+                if(list.Contains(item))
+                    list.Remove(item);
             }
             return list;
         }
