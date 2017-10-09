@@ -25,6 +25,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace Visyn.Collection
@@ -65,6 +66,11 @@ namespace Visyn.Collection
         {
             if (!list.Contains(newItem))  list.Add(newItem);
             return list;
+        }
+		
+        public static ReadOnlyCollection<T> AsReadOnly<T>(this IList<T> list)
+        {
+            return new ReadOnlyCollection<T>(list);
         }
 
         [Obsolete("Use GetIndexes<T> instead. Name changed for clarity!",true)]
