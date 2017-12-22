@@ -24,6 +24,7 @@
 
 using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -97,10 +98,17 @@ namespace Visyn.Collection
         /// <param name="source">The source.</param>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public static void AddIfNotPresent<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key, TValue value)
+        public static bool AddIfNotPresent<TKey, TValue>(this IDictionary<TKey, TValue> source, TKey key, TValue value)
         {
-            if (source == null || source.ContainsKey(key)) return;
-            source.Add(key,value);
+            if (source == null) return false;
+
+            var concurrent = source as ConcurrentDictionary<TKey, TValue>;
+
+            if (concurrent != null) return concurrent.TryAdd(key, value);
+
+            if (source.ContainsKey(key)) return false;
+            source.Add(key, value);
+            return true;
         }
 
         /// <summary>
