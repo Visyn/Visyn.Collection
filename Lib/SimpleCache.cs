@@ -55,7 +55,5 @@ namespace Visyn.Collection
         {
             GetMissingCacheItem = new Func<TKey, TValue>(itemDelegte);
         }
-
-
     }
 }
