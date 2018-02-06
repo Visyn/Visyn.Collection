@@ -434,6 +434,14 @@ namespace Visyn.Collection
             return !coll1.Cast<object>().Where((t, i) => !Equals(t,coll2[i])).Any();
         }
 
+
+        public static bool Matches<T>(this ICollection<T> coll, T item, IComparer<T> comparer)
+        {
+            if(comparer == null) throw new NullReferenceException($"{nameof(Matches)} comparer can not be null");
+
+            return coll.Any(c => comparer.Compare(c, item) == 0);
+        }
+
         public static Dictionary<TKey,TValue> ToDictionary<TKey,TValue,T>(this IEnumerable<T> values, Func<T, KeyValuePair<TKey, TValue>> func)
         {
             var dict = new Dictionary<TKey,TValue>();
