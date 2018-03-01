@@ -20,7 +20,7 @@ using System.Collections.Generic;
 
 namespace Visyn.Collection.MoreLinq
 {
-    public static class MoreEnumerable
+    public static partial class MoreEnumerable
     {
         /// <summary>
         /// Processes a sequence into a series of subsequences representing a windowed subset of the original
