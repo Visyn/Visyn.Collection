@@ -31,6 +31,14 @@ namespace Visyn.Collection
 {
     public static class Enumeration
     {
+        public static void CopyTo<T>(this IEnumerable<T> items, T[] array, int arrayIndex)
+        {
+            foreach (var item in items)
+            {
+                array[arrayIndex++] = item;
+            }
+        }
+		
         public static IEnumerable<int> CountTo(int count, int by = 1)
         {
             if (count > 0) for (var i = 0; i < count; i += by) yield return i;

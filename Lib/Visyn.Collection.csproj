@@ -18,7 +18,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <AssemblyVersion>2.1.37.67</AssemblyVersion>
-    <ApplicationVersion>2.1.60.77</ApplicationVersion>
+    <ApplicationVersion>2.1.78.120</ApplicationVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -38,6 +38,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ArrayExtensions.cs" />
+    <Compile Include="ArrayWithDefault.cs" />
     <Compile Include="BlackList.cs" />
     <Compile Include="BlackWhiteList.cs" />
     <Compile Include="CollectionExtensions.cs" />

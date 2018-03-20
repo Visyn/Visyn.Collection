@@ -106,7 +106,7 @@ namespace Visyn.Collection
  
             for(var i=0;i< count; i++)
             {
-                result[i++] = list[i];
+                result[i] = list[i];
             }
             return result;
         }
