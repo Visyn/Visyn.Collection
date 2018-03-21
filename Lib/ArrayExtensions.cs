@@ -40,7 +40,7 @@ namespace Visyn.Collection
         public static int IndexOf<T>(this T[] array, T item)
         {
             for (var i = 0; i < array.Length; i++)
-                if (array.Equals(item))
+                if (array[i].Equals(item))
                     return i;
             return -1;
         }

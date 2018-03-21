@@ -39,6 +39,7 @@ namespace Visyn.Collection
     /// <seealso cref="System.Collections.Generic.ICollection{T}" />
     /// <seealso cref="System.Collections.IEnumerable" />
     /// <seealso cref="System.Collections.Generic.IEnumerable{T}" />
+    [Obsolete("Works, not currently used or tested")]
     public class ArrayWithDefault<T> : IList<T>,ICollection<T>, IEnumerable , IEnumerable<T>
     {
         /// <summary>
