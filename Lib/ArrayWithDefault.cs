@@ -27,7 +27,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.ServiceModel;
 
 namespace Visyn.Collection
 {
@@ -125,7 +124,7 @@ namespace Visyn.Collection
         /// <exception cref="ActionNotSupportedException">If attempt to remove default item from Array</exception>
         public bool Remove(T item)
         {
-            if(item.Equals(_defaultItem)) throw new ActionNotSupportedException($"Can not Remove default item [{_defaultItem}]");
+            if(item.Equals(_defaultItem)) throw new NotSupportedException($"Can not Remove default item [{_defaultItem}]");
 
             for (var i = 0; i < Count; i++)
             {
