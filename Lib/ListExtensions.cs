@@ -68,10 +68,7 @@ namespace Visyn.Collection
             return list;
         }
 		
-        public static ReadOnlyCollection<T> AsReadOnly<T>(this IList<T> list)
-        {
-            return new ReadOnlyCollection<T>(list);
-        }
+        public static ReadOnlyCollection<T> AsReadOnly<T>(this IList<T> list) => new ReadOnlyCollection<T>(list);
 
         [Obsolete("Use GetIndexes<T> instead. Name changed for clarity!",true)]
         public static List<T> Get<T>(this IList<T> list, IEnumerable<int> indexes) => new List<T>(indexes.Select(index => list[index]));
