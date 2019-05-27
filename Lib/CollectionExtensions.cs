@@ -1,7 +1,7 @@
-﻿#region Copyright (c) 2015-2018 Visyn
+﻿#region Copyright (c) 2015-2019 Visyn
 // The MIT License(MIT)
 // 
-// Copyright (c) 2015-2018 Visyn
+// Copyright (c) 2015-2019 Visyn
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -207,15 +207,15 @@ namespace Visyn.Collection
             return objects;
         }
 
-        public static Tout[] ToArray<TIn,Tout>(this ICollection<TIn> collection, Func<TIn, Tout> converter = null)
+        public static TOut[] ToArray<TIn, TOut>(this ICollection<TIn> collection, Func<TIn, TOut> converter = null)
         {
-            if (collection == null) return new Tout[] { };
-            var objects = new Tout[collection.Count];
+            if (collection == null) return new TOut[] { };
+            var objects = new TOut[collection.Count];
             var index = 0;
 
             foreach (var item in collection)
             {
-                Tout value = converter.Invoke(item);
+                TOut value = converter.Invoke(item);
                 objects[index++] = value;
             }
             return objects;

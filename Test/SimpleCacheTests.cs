@@ -147,7 +147,49 @@ namespace Visyn.Collection.Test
             Assert.AreEqual(cache.Count, 0);
         }
 
+#region IEnumerable Tests
 
+        [Test]
+        public static void GetEnumeratorTest()
+        {
+            var cache = new SimpleCache<string, int>(TestStrlenFunc);
+
+            cache.VerifyCacheCount(0);
+
+            Assert.AreEqual(cache.Count, 0);
+            cache.CacheGet("first");
+            cache.VerifyCacheCount(1);
+            Assert.Throws<ArgumentNullException>(() => cache.Get(null));
+            cache.CacheGet("second");
+            cache.VerifyCacheCount(2);
+            
+            {
+                var enumerator = cache.GetEnumerator();
+                int count = 0;
+                while (enumerator.MoveNext())
+                {
+                    var current = enumerator.Current;
+                    Assert.IsTrue(cache.ContainsKey(current.Key));
+                    count++;
+                }
+                Assert.AreEqual(2, count);
+                cache.VerifyCacheCount(count);
+            }
+            {
+                var enumerator = ((IEnumerable)cache).GetEnumerator();
+                int count = 0;
+                while (enumerator.MoveNext())
+                {
+                    var current = enumerator.Current;
+                    Assert.IsTrue(current is KeyValuePair<string,int>);
+                    Assert.IsTrue(cache.ContainsKey(((KeyValuePair<string, int>)current).Key));
+                    count++;
+                }
+                Assert.AreEqual(2, count);
+                cache.VerifyCacheCount(count);
+            }
+        }
+#endregion
         [Test]
         public static void HitCountersTest( )
         {
